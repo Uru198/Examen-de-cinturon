@@ -3,6 +3,7 @@ from flask_app.config.mysqlconnection import  connectToMySQL
 from flask import flash
 
 import re
+import datetime
 
 class appointment:
 
@@ -39,10 +40,45 @@ class appointment:
             es_valido = False
             
         
+        
         #Consultar si ya existe ese correo electrónico
             
 
         return es_valido
+    
+    @staticmethod
+    def valida_cita1(formulario):
+        
+     
+        es_valido = True
+        
+        if len(formulario['tasks']) < 3:
+            flash('El nombre de la cita debe tener al menos 3 caracteres', 'cita')
+            es_valido = False
+        
+        if len(formulario['tasks']) < 3:
+            flash('El nombre de la cita debe tener al menos 3 caracteres', 'cita1')
+            es_valido = False
+        
+        if formulario['date_made'] == "":
+            flash('Ingrese una fecha', 'cita')
+            es_valido = False
+            
+        else:
+            
+            aut = formulario['date_made'].split('-')
+            #["2020","06","11"]
+        
+            d1 = datetime.datetime(int.aut[0], int.aut[1], int.aut[2])
+            d2 = datetime.datetime.now()
+            if d2 < d1:
+                flash('Ingrese una fecha futura', 'cita1')
+                es_valido = False
+            
+      
+        return es_valido
+        
+            
 
 
     @classmethod

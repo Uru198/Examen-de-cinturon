@@ -58,6 +58,10 @@ def update_cita():
     if not appointment.valida_cita(request.form): 
         return redirect('/edit/cita/'+request.form['id'])
     
+    if not appointment.valida_cita1(request.form): 
+        return redirect('/edit/cita/'+request.form['id'])
+    
+    
     appointment.update(request.form)
     return redirect('/dashboard')
 
